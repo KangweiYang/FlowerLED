@@ -34,6 +34,11 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
+#define LED0  &htim1, TIM_CHANNEL_1
+#define LED1  &htim1, TIM_CHANNEL_2
+#define LED2  &htim1, TIM_CHANNEL_3
+#define LED3  &htim1, TIM_CHANNEL_4
+#define LED4  &htim2, TIM_CHANNEL_1
 #define DEBUG
 #define TAG "main"
 
@@ -58,6 +63,7 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
+int eventOfLED[5]={0, 0, 0, 0, 0};      //0:inAct   1:waitForAct    2.acted 3.failToAct 4.allActed
 uint16_t SW0cont = 0;
 uint16_t SW1cont = 0;
 uint16_t SW2cont = 0;
@@ -73,7 +79,50 @@ void SystemClock_Config(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+uint32_t Get_RandomNum(){
+//    HAL_FLASH_Unlock();
+//    uint32_t randomData = *(__IO uint32_t*)0x08030000;
+//    info("%lX", randomData);
+//    HAL_FLASH_Lock();
+//    HAL_FLASH_Lock();
+    return HAL_GetTick();
+}
 
+void Renew_RandomNum(){
+//    HAL_FLASH_Unlock();
+//    uint32_t randomData = *(__IO uint32_t*)0x08030000;
+//    uint32_t newRandomData = randomData;
+//    HAL_FLASH_Program(FLASH_TYPEPROGRAM_WORD, 0x08030000, newRandomData ^ (HAL_GetTick() & 0x12344321));
+//    uint32_t NewRandomData = *(__IO uint32_t*)0x08030000;
+//    info("Renew! Data == %lX", NewRandomData);
+//    info("getData == %lX", *(__IO uint32_t*)0x08030000);
+//    HAL_FLASH_Lock();
+}
+
+
+void FSMunit_ChangeEventTo_WaitForAct(int LED) {
+    if (eventOfLED[LED] == 0) {               //select the inAct LED, change it to waitForAct
+        eventOfLED[LED] = 1;
+        info("eventOfLED[%d} is changed from 0 to 1!", LED);
+        if (eventOfLED[0] == 2
+            && eventOfLED[1] == 2
+            && eventOfLED[2] == 2
+            && eventOfLED[3] == 2
+            && eventOfLED[4] == 2) {                                //all LEDs are targetEvent
+            for (int i = 0; i < 5; ++i) {
+                eventOfLED[i] = 4;
+            }
+            info("ALL LED ARE ACTED!!!");
+        }
+    } else if (eventOfLED[LED] != 4) {
+        info("the randomNum is not in [0, 4], let it ++ and retry!");
+        FSMunit_ChangeEventTo_WaitForAct((LED + 1) % 5);    //selected the acted LED, change the LED number
+    }
+}
+
+void FSM_ChangeEventTo_WaitForAct() {
+    FSMunit_ChangeEventTo_WaitForAct(HAL_GetTick() % 5);
+}
 /* USER CODE END 0 */
 
 /**
@@ -108,15 +157,34 @@ int main(void)
   MX_TIM2_Init();
   MX_USART1_UART_Init();
   MX_TIM3_Init();
+  MX_TIM4_Init();
+  MX_TIM5_Init();
   /* USER CODE BEGIN 2 */
-    info("STM#32, Start!");
+    info("STM32, Start!");
+//    FLASH_EraseInitTypeDef EraseInitStruct;
+//    EraseInitStruct.TypeErase = FLASH_TYPEERASE_SECTORS;
+//    EraseInitStruct.Sector = 5;
+//    EraseInitStruct.NbSectors = 1;
+//    HAL_FLASHEx_Erase(&EraseInitStruct, 0x0);
+    HAL_TIM_PWM_Start(LED0);           //LED PWM Start! !!!you should shut off after test.
+    HAL_TIM_PWM_Start(LED1);
+    HAL_TIM_PWM_Start(LED2);
+    HAL_TIM_PWM_Start(LED3);
+    HAL_TIM_PWM_Start(LED4);
+
+    HAL_TIM_Base_Start_IT(&htim5);
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
     while (1) {
     /* USER CODE END WHILE */
-
+//        info("random number is %lX", Get_RandomNum());
+        HAL_Delay(500);
+//Renew_RandomNum();
+//        Get_RandomNum();
+//        Get_RandomNum();
+        FSM_ChangeEventTo_WaitForAct();
     /* USER CODE BEGIN 3 */
     }
   /* USER CODE END 3 */
@@ -174,24 +242,34 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
         if (HAL_GPIO_ReadPin(SW0_GPIO_Port, SW0_Pin) == SET) {
             SW0cont++;
             info("SW0 Pressed! cont == %d", SW0cont);
-        }
-        else if (HAL_GPIO_ReadPin(SW1_GPIO_Port, SW1_Pin) == SET) {
+        } else if (HAL_GPIO_ReadPin(SW1_GPIO_Port, SW1_Pin) == SET) {
             SW1cont++;
             info("SW1 Pressed! cont == %d", SW1cont);
-        }
-        else if (HAL_GPIO_ReadPin(SW2_GPIO_Port, SW2_Pin) == SET) {
+        } else if (HAL_GPIO_ReadPin(SW2_GPIO_Port, SW2_Pin) == SET) {
             SW2cont++;
             info("SW2 Pressed! cont == %d", SW2cont);
-        }
-        else if (HAL_GPIO_ReadPin(SW3_GPIO_Port, SW3_Pin) == SET) {
+        } else if (HAL_GPIO_ReadPin(SW3_GPIO_Port, SW3_Pin) == SET) {
             SW3cont++;
             info("SW3 Pressed! cont == %d", SW3cont);
-        }
-        else if (HAL_GPIO_ReadPin(SW4_GPIO_Port, SW4_Pin) == SET) {
+        } else if (HAL_GPIO_ReadPin(SW4_GPIO_Port, SW4_Pin) == SET) {
             SW4cont++;
             info("SW4 Pressed! cont == %d", SW4cont);
         }
+        Renew_RandomNum();
         HAL_TIM_Base_Stop(&htim3);
+    }
+
+    if (htim->Instance == htim5.Instance) {                             //0.5s timer
+        if (eventOfLED[0] == 0 && eventOfLED[1] == 0 && eventOfLED[2] == 0 && eventOfLED[3] == 0 && eventOfLED[4] == 0) {                                         //all LEDs are inactivated
+            static int inActCont;
+            inActCont++;
+            if (inActCont == 7) {                                  //3s
+                info("random number is %lX", Get_RandomNum());
+                if (Get_RandomNum() == 0) error("random number is 0!!!");
+                FSM_ChangeEventTo_WaitForAct();
+                inActCont = 0;
+            }
+        }
     }
 }
 

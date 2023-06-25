@@ -1,5 +1,5 @@
 CMakeFiles/FlowerLEDs.elf.dir/Core/Src/sysmem.c.obj: \
- /home/felix/CLionProjects/FlowerLEDs/Core/Src/sysmem.c \
+ /home/felix/CLionProjects/FlowerLED/Core/Src/sysmem.c \
  /usr/include/newlib/errno.h /usr/include/newlib/sys/errno.h \
  /usr/include/newlib/sys/reent.h /usr/include/newlib/_ansi.h \
  /usr/include/newlib/newlib.h /usr/include/newlib/_newlib_version.h \

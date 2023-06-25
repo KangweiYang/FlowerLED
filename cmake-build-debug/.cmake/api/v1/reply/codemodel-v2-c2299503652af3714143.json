@@ -39,7 +39,7 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "FlowerLEDs.elf::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-FlowerLEDs.elf-Debug-9a1263a8a7aabc29b264.json",
+					"jsonFile" : "target-FlowerLEDs.elf-Debug-9c08c8de2d32600caf2f.json",
 					"name" : "FlowerLEDs.elf",
 					"projectIndex" : 0
 				}
@@ -49,8 +49,8 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "/home/felix/CLionProjects/FlowerLEDs/cmake-build-debug",
-		"source" : "/home/felix/CLionProjects/FlowerLEDs"
+		"build" : "/home/felix/CLionProjects/FlowerLED/cmake-build-debug",
+		"source" : "/home/felix/CLionProjects/FlowerLED"
 	},
 	"version" : 
 	{

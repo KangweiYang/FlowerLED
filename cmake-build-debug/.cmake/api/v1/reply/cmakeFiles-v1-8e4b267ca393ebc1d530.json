@@ -1207,8 +1207,8 @@
 	"kind" : "cmakeFiles",
 	"paths" : 
 	{
-		"build" : "/home/felix/CLionProjects/FlowerLEDs/cmake-build-debug",
-		"source" : "/home/felix/CLionProjects/FlowerLEDs"
+		"build" : "/home/felix/CLionProjects/FlowerLED/cmake-build-debug",
+		"source" : "/home/felix/CLionProjects/FlowerLED"
 	},
 	"version" : 
 	{

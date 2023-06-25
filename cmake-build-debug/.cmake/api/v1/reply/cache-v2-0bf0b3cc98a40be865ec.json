@@ -163,7 +163,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/home/felix/CLionProjects/FlowerLEDs/cmake-build-debug"
+			"value" : "/home/felix/CLionProjects/FlowerLED/cmake-build-debug"
 		},
 		{
 			"name" : "CMAKE_CACHE_MAJOR_VERSION",
@@ -703,7 +703,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "/home/felix/CLionProjects/FlowerLEDs/cmake-build-debug/CMakeFiles/pkgRedirects"
+			"value" : "/home/felix/CLionProjects/FlowerLED/cmake-build-debug/CMakeFiles/pkgRedirects"
 		},
 		{
 			"name" : "CMAKE_GENERATOR",
@@ -763,7 +763,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/home/felix/CLionProjects/FlowerLEDs"
+			"value" : "/home/felix/CLionProjects/FlowerLED"
 		},
 		{
 			"name" : "CMAKE_INSTALL_PREFIX",
@@ -1255,7 +1255,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "/home/felix/CLionProjects/FlowerLEDs/cmake-build-debug"
+			"value" : "/home/felix/CLionProjects/FlowerLED/cmake-build-debug"
 		},
 		{
 			"name" : "FlowerLEDs_IS_TOP_LEVEL",
@@ -1279,7 +1279,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "/home/felix/CLionProjects/FlowerLEDs"
+			"value" : "/home/felix/CLionProjects/FlowerLED"
 		},
 		{
 			"name" : "ProcessorCount_cmd_nproc",

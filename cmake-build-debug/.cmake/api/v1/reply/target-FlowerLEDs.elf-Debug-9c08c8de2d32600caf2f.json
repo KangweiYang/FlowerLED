@@ -154,23 +154,23 @@
 			[
 				{
 					"backtrace" : 10,
-					"path" : "/home/felix/CLionProjects/FlowerLEDs/Core/Inc"
+					"path" : "/home/felix/CLionProjects/FlowerLED/Core/Inc"
 				},
 				{
 					"backtrace" : 10,
-					"path" : "/home/felix/CLionProjects/FlowerLEDs/Drivers/STM32F4xx_HAL_Driver/Inc"
+					"path" : "/home/felix/CLionProjects/FlowerLED/Drivers/STM32F4xx_HAL_Driver/Inc"
 				},
 				{
 					"backtrace" : 10,
-					"path" : "/home/felix/CLionProjects/FlowerLEDs/Drivers/STM32F4xx_HAL_Driver/Inc/Legacy"
+					"path" : "/home/felix/CLionProjects/FlowerLED/Drivers/STM32F4xx_HAL_Driver/Inc/Legacy"
 				},
 				{
 					"backtrace" : 10,
-					"path" : "/home/felix/CLionProjects/FlowerLEDs/Drivers/CMSIS/Device/ST/STM32F4xx/Include"
+					"path" : "/home/felix/CLionProjects/FlowerLED/Drivers/CMSIS/Device/ST/STM32F4xx/Include"
 				},
 				{
 					"backtrace" : 10,
-					"path" : "/home/felix/CLionProjects/FlowerLEDs/Drivers/CMSIS/Include"
+					"path" : "/home/felix/CLionProjects/FlowerLED/Drivers/CMSIS/Include"
 				}
 			],
 			"language" : "C",
@@ -281,23 +281,23 @@
 			[
 				{
 					"backtrace" : 10,
-					"path" : "/home/felix/CLionProjects/FlowerLEDs/Core/Inc"
+					"path" : "/home/felix/CLionProjects/FlowerLED/Core/Inc"
 				},
 				{
 					"backtrace" : 10,
-					"path" : "/home/felix/CLionProjects/FlowerLEDs/Drivers/STM32F4xx_HAL_Driver/Inc"
+					"path" : "/home/felix/CLionProjects/FlowerLED/Drivers/STM32F4xx_HAL_Driver/Inc"
 				},
 				{
 					"backtrace" : 10,
-					"path" : "/home/felix/CLionProjects/FlowerLEDs/Drivers/STM32F4xx_HAL_Driver/Inc/Legacy"
+					"path" : "/home/felix/CLionProjects/FlowerLED/Drivers/STM32F4xx_HAL_Driver/Inc/Legacy"
 				},
 				{
 					"backtrace" : 10,
-					"path" : "/home/felix/CLionProjects/FlowerLEDs/Drivers/CMSIS/Device/ST/STM32F4xx/Include"
+					"path" : "/home/felix/CLionProjects/FlowerLED/Drivers/CMSIS/Device/ST/STM32F4xx/Include"
 				},
 				{
 					"backtrace" : 10,
-					"path" : "/home/felix/CLionProjects/FlowerLEDs/Drivers/CMSIS/Include"
+					"path" : "/home/felix/CLionProjects/FlowerLED/Drivers/CMSIS/Include"
 				}
 			],
 			"language" : "ASM",
@@ -322,7 +322,7 @@
 			},
 			{
 				"backtrace" : 2,
-				"fragment" : "-Wl,-gc-sections,--print-memory-usage,-Map=/home/felix/CLionProjects/FlowerLEDs/cmake-build-debug/FlowerLEDs.map",
+				"fragment" : "-Wl,-gc-sections,--print-memory-usage,-Map=/home/felix/CLionProjects/FlowerLED/cmake-build-debug/FlowerLEDs.map",
 				"role" : "flags"
 			},
 			{
@@ -347,7 +347,7 @@
 			},
 			{
 				"backtrace" : 4,
-				"fragment" : "/home/felix/CLionProjects/FlowerLEDs/STM32F401CCUX_FLASH.ld",
+				"fragment" : "/home/felix/CLionProjects/FlowerLED/STM32F401CCUX_FLASH.ld",
 				"role" : "flags"
 			}
 		],

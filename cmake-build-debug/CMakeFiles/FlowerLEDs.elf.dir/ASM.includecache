@@ -6,5 +6,5 @@
 
 #IncludeRegexTransform: 
 
-/home/felix/CLionProjects/FlowerLEDs/Core/Startup/startup_stm32f401ccux.s
+/home/felix/CLionProjects/FlowerLED/Core/Startup/startup_stm32f401ccux.s
 

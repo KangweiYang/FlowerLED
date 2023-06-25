@@ -1,5 +1,5 @@
 CMakeFiles/FlowerLEDs.elf.dir/Core/Src/syscalls.c.obj: \
- /home/felix/CLionProjects/FlowerLEDs/Core/Src/syscalls.c \
+ /home/felix/CLionProjects/FlowerLED/Core/Src/syscalls.c \
  /usr/include/newlib/sys/stat.h /usr/include/newlib/_ansi.h \
  /usr/include/newlib/newlib.h /usr/include/newlib/_newlib_version.h \
  /usr/include/newlib/sys/config.h /usr/include/newlib/machine/ieeefp.h \
