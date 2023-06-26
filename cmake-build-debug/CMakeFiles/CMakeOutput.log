@@ -33,12 +33,12 @@ This is free software; see the source for copying conditions.  There is NO
 warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 Detecting C compiler ABI info compiled with the following output:
-Change Dir: /home/felix/CLionProjects/FlowerLED/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-j0m4Qy
+Change Dir: /home/felix/CLionProjects/FlowerLED/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-3SMn6n
 
-Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_2f690/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_2f690.dir/build.make CMakeFiles/cmTC_2f690.dir/build
-gmake[1]: Entering directory '/home/felix/CLionProjects/FlowerLED/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-j0m4Qy'
-Building C object CMakeFiles/cmTC_2f690.dir/CMakeCCompilerABI.c.obj
-/usr/bin/arm-none-eabi-gcc   -fdiagnostics-color=always   -v -o CMakeFiles/cmTC_2f690.dir/CMakeCCompilerABI.c.obj -c /home/felix/code/clion-2023.1.3/bin/cmake/linux/x64/share/cmake-3.25/Modules/CMakeCCompilerABI.c
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_26940/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_26940.dir/build.make CMakeFiles/cmTC_26940.dir/build
+gmake[1]: Entering directory '/home/felix/CLionProjects/FlowerLED/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-3SMn6n'
+Building C object CMakeFiles/cmTC_26940.dir/CMakeCCompilerABI.c.obj
+/usr/bin/arm-none-eabi-gcc   -fdiagnostics-color=always   -v -o CMakeFiles/cmTC_26940.dir/CMakeCCompilerABI.c.obj -c /home/felix/code/clion-2023.1.3/bin/cmake/linux/x64/share/cmake-3.25/Modules/CMakeCCompilerABI.c
 Using built-in specs.
 COLLECT_GCC=/usr/bin/arm-none-eabi-gcc
 Target: arm-none-eabi
@@ -46,8 +46,8 @@ Configured with: ../configure --build=x86_64-linux-gnu --prefix=/usr --includedi
 Thread model: single
 Supported LTO compression algorithms: zlib
 gcc version 10.3.1 20210621 (release) (15:10.3-2021.07-4) 
-COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles/cmTC_2f690.dir/CMakeCCompilerABI.c.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-mlibarch=armv4t' '-march=armv4t'
- /usr/lib/gcc/arm-none-eabi/10.3.1/cc1 -quiet -v -D__USES_INITFINI__ /home/felix/code/clion-2023.1.3/bin/cmake/linux/x64/share/cmake-3.25/Modules/CMakeCCompilerABI.c -quiet -dumpbase CMakeCCompilerABI.c -mcpu=arm7tdmi -mfloat-abi=soft -marm -mlibarch=armv4t -march=armv4t -auxbase-strip CMakeFiles/cmTC_2f690.dir/CMakeCCompilerABI.c.obj -version -fdiagnostics-color=always -o /tmp/ccYN6m8X.s
+COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles/cmTC_26940.dir/CMakeCCompilerABI.c.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-mlibarch=armv4t' '-march=armv4t'
+ /usr/lib/gcc/arm-none-eabi/10.3.1/cc1 -quiet -v -D__USES_INITFINI__ /home/felix/code/clion-2023.1.3/bin/cmake/linux/x64/share/cmake-3.25/Modules/CMakeCCompilerABI.c -quiet -dumpbase CMakeCCompilerABI.c -mcpu=arm7tdmi -mfloat-abi=soft -marm -mlibarch=armv4t -march=armv4t -auxbase-strip CMakeFiles/cmTC_26940.dir/CMakeCCompilerABI.c.obj -version -fdiagnostics-color=always -o /tmp/ccRncZmW.s
 GNU C17 (15:10.3-2021.07-4) version 10.3.1 20210621 (release) (arm-none-eabi)
 	compiled by GNU C version 11.2.0, GMP version 6.2.1, MPFR version 4.1.0, MPC version 1.2.1, isl version isl-0.24-GMP
 
@@ -64,18 +64,18 @@ GNU C17 (15:10.3-2021.07-4) version 10.3.1 20210621 (release) (arm-none-eabi)
 
 GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
 Compiler executable checksum: 4cf7574ae54eb0935abb4a8c56f8bcfe
-COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles/cmTC_2f690.dir/CMakeCCompilerABI.c.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-mlibarch=armv4t' '-march=armv4t'
- /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/bin/as -v -march=armv4t -mfloat-abi=soft -meabi=5 -o CMakeFiles/cmTC_2f690.dir/CMakeCCompilerABI.c.obj /tmp/ccYN6m8X.s
+COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles/cmTC_26940.dir/CMakeCCompilerABI.c.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-mlibarch=armv4t' '-march=armv4t'
+ /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/bin/as -v -march=armv4t -mfloat-abi=soft -meabi=5 -o CMakeFiles/cmTC_26940.dir/CMakeCCompilerABI.c.obj /tmp/ccRncZmW.s
 GNU assembler version 2.38 (arm-none-eabi) using BFD version (2.38-3ubuntu1+15build1) 2.38
 COMPILER_PATH=/usr/lib/gcc/arm-none-eabi/10.3.1/:/usr/lib/gcc/arm-none-eabi/10.3.1/:/usr/lib/gcc/arm-none-eabi/:/usr/lib/gcc/arm-none-eabi/10.3.1/:/usr/lib/gcc/arm-none-eabi/:/usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/bin/
 LIBRARY_PATH=/usr/lib/gcc/arm-none-eabi/10.3.1/:/usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/
-COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles/cmTC_2f690.dir/CMakeCCompilerABI.c.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-mlibarch=armv4t' '-march=armv4t'
-Linking C static library libcmTC_2f690.a
-/home/felix/code/clion-2023.1.3/bin/cmake/linux/x64/bin/cmake -P CMakeFiles/cmTC_2f690.dir/cmake_clean_target.cmake
-/home/felix/code/clion-2023.1.3/bin/cmake/linux/x64/bin/cmake -E cmake_link_script CMakeFiles/cmTC_2f690.dir/link.txt --verbose=1
-arm-none-eabi-ar qc libcmTC_2f690.a CMakeFiles/cmTC_2f690.dir/CMakeCCompilerABI.c.obj
-/usr/bin/arm-none-eabi-ranlib libcmTC_2f690.a
-gmake[1]: Leaving directory '/home/felix/CLionProjects/FlowerLED/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-j0m4Qy'
+COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles/cmTC_26940.dir/CMakeCCompilerABI.c.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-mlibarch=armv4t' '-march=armv4t'
+Linking C static library libcmTC_26940.a
+/home/felix/code/clion-2023.1.3/bin/cmake/linux/x64/bin/cmake -P CMakeFiles/cmTC_26940.dir/cmake_clean_target.cmake
+/home/felix/code/clion-2023.1.3/bin/cmake/linux/x64/bin/cmake -E cmake_link_script CMakeFiles/cmTC_26940.dir/link.txt --verbose=1
+arm-none-eabi-ar qc libcmTC_26940.a CMakeFiles/cmTC_26940.dir/CMakeCCompilerABI.c.obj
+/usr/bin/arm-none-eabi-ranlib libcmTC_26940.a
+gmake[1]: Leaving directory '/home/felix/CLionProjects/FlowerLED/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-3SMn6n'
 
 
 
@@ -94,12 +94,12 @@ Parsed C implicit include dir info from above output: rv=done
 
 Parsed C implicit link information from above output:
   link line regex: [^( *|.*[/\])(arm-none-eabi-ld|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\]+-)?ld|collect2)[^/\]*( |$)]
-  ignore line: [Change Dir: /home/felix/CLionProjects/FlowerLED/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-j0m4Qy]
+  ignore line: [Change Dir: /home/felix/CLionProjects/FlowerLED/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-3SMn6n]
   ignore line: []
-  ignore line: [Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_2f690/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_2f690.dir/build.make CMakeFiles/cmTC_2f690.dir/build]
-  ignore line: [gmake[1]: Entering directory '/home/felix/CLionProjects/FlowerLED/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-j0m4Qy']
-  ignore line: [Building C object CMakeFiles/cmTC_2f690.dir/CMakeCCompilerABI.c.obj]
-  ignore line: [/usr/bin/arm-none-eabi-gcc   -fdiagnostics-color=always   -v -o CMakeFiles/cmTC_2f690.dir/CMakeCCompilerABI.c.obj -c /home/felix/code/clion-2023.1.3/bin/cmake/linux/x64/share/cmake-3.25/Modules/CMakeCCompilerABI.c]
+  ignore line: [Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_26940/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_26940.dir/build.make CMakeFiles/cmTC_26940.dir/build]
+  ignore line: [gmake[1]: Entering directory '/home/felix/CLionProjects/FlowerLED/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-3SMn6n']
+  ignore line: [Building C object CMakeFiles/cmTC_26940.dir/CMakeCCompilerABI.c.obj]
+  ignore line: [/usr/bin/arm-none-eabi-gcc   -fdiagnostics-color=always   -v -o CMakeFiles/cmTC_26940.dir/CMakeCCompilerABI.c.obj -c /home/felix/code/clion-2023.1.3/bin/cmake/linux/x64/share/cmake-3.25/Modules/CMakeCCompilerABI.c]
   ignore line: [Using built-in specs.]
   ignore line: [COLLECT_GCC=/usr/bin/arm-none-eabi-gcc]
   ignore line: [Target: arm-none-eabi]
@@ -107,8 +107,8 @@ Parsed C implicit link information from above output:
   ignore line: [Thread model: single]
   ignore line: [Supported LTO compression algorithms: zlib]
   ignore line: [gcc version 10.3.1 20210621 (release) (15:10.3-2021.07-4) ]
-  ignore line: [COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles/cmTC_2f690.dir/CMakeCCompilerABI.c.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-mlibarch=armv4t' '-march=armv4t']
-  ignore line: [ /usr/lib/gcc/arm-none-eabi/10.3.1/cc1 -quiet -v -D__USES_INITFINI__ /home/felix/code/clion-2023.1.3/bin/cmake/linux/x64/share/cmake-3.25/Modules/CMakeCCompilerABI.c -quiet -dumpbase CMakeCCompilerABI.c -mcpu=arm7tdmi -mfloat-abi=soft -marm -mlibarch=armv4t -march=armv4t -auxbase-strip CMakeFiles/cmTC_2f690.dir/CMakeCCompilerABI.c.obj -version -fdiagnostics-color=always -o /tmp/ccYN6m8X.s]
+  ignore line: [COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles/cmTC_26940.dir/CMakeCCompilerABI.c.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-mlibarch=armv4t' '-march=armv4t']
+  ignore line: [ /usr/lib/gcc/arm-none-eabi/10.3.1/cc1 -quiet -v -D__USES_INITFINI__ /home/felix/code/clion-2023.1.3/bin/cmake/linux/x64/share/cmake-3.25/Modules/CMakeCCompilerABI.c -quiet -dumpbase CMakeCCompilerABI.c -mcpu=arm7tdmi -mfloat-abi=soft -marm -mlibarch=armv4t -march=armv4t -auxbase-strip CMakeFiles/cmTC_26940.dir/CMakeCCompilerABI.c.obj -version -fdiagnostics-color=always -o /tmp/ccRncZmW.s]
   ignore line: [GNU C17 (15:10.3-2021.07-4) version 10.3.1 20210621 (release) (arm-none-eabi)]
   ignore line: [	compiled by GNU C version 11.2.0  GMP version 6.2.1  MPFR version 4.1.0  MPC version 1.2.1  isl version isl-0.24-GMP]
   ignore line: []
@@ -125,18 +125,18 @@ Parsed C implicit link information from above output:
   ignore line: []
   ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
   ignore line: [Compiler executable checksum: 4cf7574ae54eb0935abb4a8c56f8bcfe]
-  ignore line: [COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles/cmTC_2f690.dir/CMakeCCompilerABI.c.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-mlibarch=armv4t' '-march=armv4t']
-  ignore line: [ /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/bin/as -v -march=armv4t -mfloat-abi=soft -meabi=5 -o CMakeFiles/cmTC_2f690.dir/CMakeCCompilerABI.c.obj /tmp/ccYN6m8X.s]
+  ignore line: [COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles/cmTC_26940.dir/CMakeCCompilerABI.c.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-mlibarch=armv4t' '-march=armv4t']
+  ignore line: [ /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/bin/as -v -march=armv4t -mfloat-abi=soft -meabi=5 -o CMakeFiles/cmTC_26940.dir/CMakeCCompilerABI.c.obj /tmp/ccRncZmW.s]
   ignore line: [GNU assembler version 2.38 (arm-none-eabi) using BFD version (2.38-3ubuntu1+15build1) 2.38]
   ignore line: [COMPILER_PATH=/usr/lib/gcc/arm-none-eabi/10.3.1/:/usr/lib/gcc/arm-none-eabi/10.3.1/:/usr/lib/gcc/arm-none-eabi/:/usr/lib/gcc/arm-none-eabi/10.3.1/:/usr/lib/gcc/arm-none-eabi/:/usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/bin/]
   ignore line: [LIBRARY_PATH=/usr/lib/gcc/arm-none-eabi/10.3.1/:/usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/]
-  ignore line: [COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles/cmTC_2f690.dir/CMakeCCompilerABI.c.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-mlibarch=armv4t' '-march=armv4t']
-  ignore line: [Linking C static library libcmTC_2f690.a]
-  ignore line: [/home/felix/code/clion-2023.1.3/bin/cmake/linux/x64/bin/cmake -P CMakeFiles/cmTC_2f690.dir/cmake_clean_target.cmake]
-  ignore line: [/home/felix/code/clion-2023.1.3/bin/cmake/linux/x64/bin/cmake -E cmake_link_script CMakeFiles/cmTC_2f690.dir/link.txt --verbose=1]
-  ignore line: [arm-none-eabi-ar qc libcmTC_2f690.a CMakeFiles/cmTC_2f690.dir/CMakeCCompilerABI.c.obj]
-  ignore line: [/usr/bin/arm-none-eabi-ranlib libcmTC_2f690.a]
-  ignore line: [gmake[1]: Leaving directory '/home/felix/CLionProjects/FlowerLED/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-j0m4Qy']
+  ignore line: [COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles/cmTC_26940.dir/CMakeCCompilerABI.c.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-mlibarch=armv4t' '-march=armv4t']
+  ignore line: [Linking C static library libcmTC_26940.a]
+  ignore line: [/home/felix/code/clion-2023.1.3/bin/cmake/linux/x64/bin/cmake -P CMakeFiles/cmTC_26940.dir/cmake_clean_target.cmake]
+  ignore line: [/home/felix/code/clion-2023.1.3/bin/cmake/linux/x64/bin/cmake -E cmake_link_script CMakeFiles/cmTC_26940.dir/link.txt --verbose=1]
+  ignore line: [arm-none-eabi-ar qc libcmTC_26940.a CMakeFiles/cmTC_26940.dir/CMakeCCompilerABI.c.obj]
+  ignore line: [/usr/bin/arm-none-eabi-ranlib libcmTC_26940.a]
+  ignore line: [gmake[1]: Leaving directory '/home/felix/CLionProjects/FlowerLED/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-3SMn6n']
   ignore line: []
   ignore line: []
   implicit libs: []
@@ -146,12 +146,12 @@ Parsed C implicit link information from above output:
 
 
 Detecting CXX compiler ABI info compiled with the following output:
-Change Dir: /home/felix/CLionProjects/FlowerLED/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-jFINmZ
+Change Dir: /home/felix/CLionProjects/FlowerLED/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-QBoVR6
 
-Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_c759f/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_c759f.dir/build.make CMakeFiles/cmTC_c759f.dir/build
-gmake[1]: Entering directory '/home/felix/CLionProjects/FlowerLED/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-jFINmZ'
-Building CXX object CMakeFiles/cmTC_c759f.dir/CMakeCXXCompilerABI.cpp.obj
-/usr/bin/arm-none-eabi-g++   -fdiagnostics-color=always   -v -o CMakeFiles/cmTC_c759f.dir/CMakeCXXCompilerABI.cpp.obj -c /home/felix/code/clion-2023.1.3/bin/cmake/linux/x64/share/cmake-3.25/Modules/CMakeCXXCompilerABI.cpp
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_a3bdb/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_a3bdb.dir/build.make CMakeFiles/cmTC_a3bdb.dir/build
+gmake[1]: Entering directory '/home/felix/CLionProjects/FlowerLED/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-QBoVR6'
+Building CXX object CMakeFiles/cmTC_a3bdb.dir/CMakeCXXCompilerABI.cpp.obj
+/usr/bin/arm-none-eabi-g++   -fdiagnostics-color=always   -v -o CMakeFiles/cmTC_a3bdb.dir/CMakeCXXCompilerABI.cpp.obj -c /home/felix/code/clion-2023.1.3/bin/cmake/linux/x64/share/cmake-3.25/Modules/CMakeCXXCompilerABI.cpp
 Using built-in specs.
 COLLECT_GCC=/usr/bin/arm-none-eabi-g++
 Target: arm-none-eabi
@@ -159,8 +159,8 @@ Configured with: ../configure --build=x86_64-linux-gnu --prefix=/usr --includedi
 Thread model: single
 Supported LTO compression algorithms: zlib
 gcc version 10.3.1 20210621 (release) (15:10.3-2021.07-4) 
-COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles/cmTC_c759f.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-mlibarch=armv4t' '-march=armv4t'
- /usr/lib/gcc/arm-none-eabi/10.3.1/cc1plus -quiet -v -D__USES_INITFINI__ /home/felix/code/clion-2023.1.3/bin/cmake/linux/x64/share/cmake-3.25/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpbase CMakeCXXCompilerABI.cpp -mcpu=arm7tdmi -mfloat-abi=soft -marm -mlibarch=armv4t -march=armv4t -auxbase-strip CMakeFiles/cmTC_c759f.dir/CMakeCXXCompilerABI.cpp.obj -version -fdiagnostics-color=always -o /tmp/ccVQANAn.s
+COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles/cmTC_a3bdb.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-mlibarch=armv4t' '-march=armv4t'
+ /usr/lib/gcc/arm-none-eabi/10.3.1/cc1plus -quiet -v -D__USES_INITFINI__ /home/felix/code/clion-2023.1.3/bin/cmake/linux/x64/share/cmake-3.25/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpbase CMakeCXXCompilerABI.cpp -mcpu=arm7tdmi -mfloat-abi=soft -marm -mlibarch=armv4t -march=armv4t -auxbase-strip CMakeFiles/cmTC_a3bdb.dir/CMakeCXXCompilerABI.cpp.obj -version -fdiagnostics-color=always -o /tmp/ccsHczTu.s
 GNU C++14 (15:10.3-2021.07-4) version 10.3.1 20210621 (release) (arm-none-eabi)
 	compiled by GNU C version 11.2.0, GMP version 6.2.1, MPFR version 4.1.0, MPC version 1.2.1, isl version isl-0.24-GMP
 
@@ -180,18 +180,18 @@ GNU C++14 (15:10.3-2021.07-4) version 10.3.1 20210621 (release) (arm-none-eabi)
 
 GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
 Compiler executable checksum: 4f994585a8ca8864fa1f4d2fb208a0ba
-COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles/cmTC_c759f.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-mlibarch=armv4t' '-march=armv4t'
- /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/bin/as -v -march=armv4t -mfloat-abi=soft -meabi=5 -o CMakeFiles/cmTC_c759f.dir/CMakeCXXCompilerABI.cpp.obj /tmp/ccVQANAn.s
+COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles/cmTC_a3bdb.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-mlibarch=armv4t' '-march=armv4t'
+ /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/bin/as -v -march=armv4t -mfloat-abi=soft -meabi=5 -o CMakeFiles/cmTC_a3bdb.dir/CMakeCXXCompilerABI.cpp.obj /tmp/ccsHczTu.s
 GNU assembler version 2.38 (arm-none-eabi) using BFD version (2.38-3ubuntu1+15build1) 2.38
 COMPILER_PATH=/usr/lib/gcc/arm-none-eabi/10.3.1/:/usr/lib/gcc/arm-none-eabi/10.3.1/:/usr/lib/gcc/arm-none-eabi/:/usr/lib/gcc/arm-none-eabi/10.3.1/:/usr/lib/gcc/arm-none-eabi/:/usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/bin/
 LIBRARY_PATH=/usr/lib/gcc/arm-none-eabi/10.3.1/:/usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/
-COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles/cmTC_c759f.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-mlibarch=armv4t' '-march=armv4t'
-Linking CXX static library libcmTC_c759f.a
-/home/felix/code/clion-2023.1.3/bin/cmake/linux/x64/bin/cmake -P CMakeFiles/cmTC_c759f.dir/cmake_clean_target.cmake
-/home/felix/code/clion-2023.1.3/bin/cmake/linux/x64/bin/cmake -E cmake_link_script CMakeFiles/cmTC_c759f.dir/link.txt --verbose=1
-arm-none-eabi-ar qc libcmTC_c759f.a CMakeFiles/cmTC_c759f.dir/CMakeCXXCompilerABI.cpp.obj
-/usr/bin/arm-none-eabi-ranlib libcmTC_c759f.a
-gmake[1]: Leaving directory '/home/felix/CLionProjects/FlowerLED/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-jFINmZ'
+COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles/cmTC_a3bdb.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-mlibarch=armv4t' '-march=armv4t'
+Linking CXX static library libcmTC_a3bdb.a
+/home/felix/code/clion-2023.1.3/bin/cmake/linux/x64/bin/cmake -P CMakeFiles/cmTC_a3bdb.dir/cmake_clean_target.cmake
+/home/felix/code/clion-2023.1.3/bin/cmake/linux/x64/bin/cmake -E cmake_link_script CMakeFiles/cmTC_a3bdb.dir/link.txt --verbose=1
+arm-none-eabi-ar qc libcmTC_a3bdb.a CMakeFiles/cmTC_a3bdb.dir/CMakeCXXCompilerABI.cpp.obj
+/usr/bin/arm-none-eabi-ranlib libcmTC_a3bdb.a
+gmake[1]: Leaving directory '/home/felix/CLionProjects/FlowerLED/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-QBoVR6'
 
 
 
@@ -216,12 +216,12 @@ Parsed CXX implicit include dir info from above output: rv=done
 
 Parsed CXX implicit link information from above output:
   link line regex: [^( *|.*[/\])(arm-none-eabi-ld|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\]+-)?ld|collect2)[^/\]*( |$)]
-  ignore line: [Change Dir: /home/felix/CLionProjects/FlowerLED/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-jFINmZ]
+  ignore line: [Change Dir: /home/felix/CLionProjects/FlowerLED/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-QBoVR6]
   ignore line: []
-  ignore line: [Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_c759f/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_c759f.dir/build.make CMakeFiles/cmTC_c759f.dir/build]
-  ignore line: [gmake[1]: Entering directory '/home/felix/CLionProjects/FlowerLED/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-jFINmZ']
-  ignore line: [Building CXX object CMakeFiles/cmTC_c759f.dir/CMakeCXXCompilerABI.cpp.obj]
-  ignore line: [/usr/bin/arm-none-eabi-g++   -fdiagnostics-color=always   -v -o CMakeFiles/cmTC_c759f.dir/CMakeCXXCompilerABI.cpp.obj -c /home/felix/code/clion-2023.1.3/bin/cmake/linux/x64/share/cmake-3.25/Modules/CMakeCXXCompilerABI.cpp]
+  ignore line: [Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_a3bdb/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_a3bdb.dir/build.make CMakeFiles/cmTC_a3bdb.dir/build]
+  ignore line: [gmake[1]: Entering directory '/home/felix/CLionProjects/FlowerLED/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-QBoVR6']
+  ignore line: [Building CXX object CMakeFiles/cmTC_a3bdb.dir/CMakeCXXCompilerABI.cpp.obj]
+  ignore line: [/usr/bin/arm-none-eabi-g++   -fdiagnostics-color=always   -v -o CMakeFiles/cmTC_a3bdb.dir/CMakeCXXCompilerABI.cpp.obj -c /home/felix/code/clion-2023.1.3/bin/cmake/linux/x64/share/cmake-3.25/Modules/CMakeCXXCompilerABI.cpp]
   ignore line: [Using built-in specs.]
   ignore line: [COLLECT_GCC=/usr/bin/arm-none-eabi-g++]
   ignore line: [Target: arm-none-eabi]
@@ -229,8 +229,8 @@ Parsed CXX implicit link information from above output:
   ignore line: [Thread model: single]
   ignore line: [Supported LTO compression algorithms: zlib]
   ignore line: [gcc version 10.3.1 20210621 (release) (15:10.3-2021.07-4) ]
-  ignore line: [COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles/cmTC_c759f.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-mlibarch=armv4t' '-march=armv4t']
-  ignore line: [ /usr/lib/gcc/arm-none-eabi/10.3.1/cc1plus -quiet -v -D__USES_INITFINI__ /home/felix/code/clion-2023.1.3/bin/cmake/linux/x64/share/cmake-3.25/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpbase CMakeCXXCompilerABI.cpp -mcpu=arm7tdmi -mfloat-abi=soft -marm -mlibarch=armv4t -march=armv4t -auxbase-strip CMakeFiles/cmTC_c759f.dir/CMakeCXXCompilerABI.cpp.obj -version -fdiagnostics-color=always -o /tmp/ccVQANAn.s]
+  ignore line: [COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles/cmTC_a3bdb.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-mlibarch=armv4t' '-march=armv4t']
+  ignore line: [ /usr/lib/gcc/arm-none-eabi/10.3.1/cc1plus -quiet -v -D__USES_INITFINI__ /home/felix/code/clion-2023.1.3/bin/cmake/linux/x64/share/cmake-3.25/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpbase CMakeCXXCompilerABI.cpp -mcpu=arm7tdmi -mfloat-abi=soft -marm -mlibarch=armv4t -march=armv4t -auxbase-strip CMakeFiles/cmTC_a3bdb.dir/CMakeCXXCompilerABI.cpp.obj -version -fdiagnostics-color=always -o /tmp/ccsHczTu.s]
   ignore line: [GNU C++14 (15:10.3-2021.07-4) version 10.3.1 20210621 (release) (arm-none-eabi)]
   ignore line: [	compiled by GNU C version 11.2.0  GMP version 6.2.1  MPFR version 4.1.0  MPC version 1.2.1  isl version isl-0.24-GMP]
   ignore line: []
@@ -250,18 +250,18 @@ Parsed CXX implicit link information from above output:
   ignore line: []
   ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
   ignore line: [Compiler executable checksum: 4f994585a8ca8864fa1f4d2fb208a0ba]
-  ignore line: [COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles/cmTC_c759f.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-mlibarch=armv4t' '-march=armv4t']
-  ignore line: [ /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/bin/as -v -march=armv4t -mfloat-abi=soft -meabi=5 -o CMakeFiles/cmTC_c759f.dir/CMakeCXXCompilerABI.cpp.obj /tmp/ccVQANAn.s]
+  ignore line: [COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles/cmTC_a3bdb.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-mlibarch=armv4t' '-march=armv4t']
+  ignore line: [ /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/bin/as -v -march=armv4t -mfloat-abi=soft -meabi=5 -o CMakeFiles/cmTC_a3bdb.dir/CMakeCXXCompilerABI.cpp.obj /tmp/ccsHczTu.s]
   ignore line: [GNU assembler version 2.38 (arm-none-eabi) using BFD version (2.38-3ubuntu1+15build1) 2.38]
   ignore line: [COMPILER_PATH=/usr/lib/gcc/arm-none-eabi/10.3.1/:/usr/lib/gcc/arm-none-eabi/10.3.1/:/usr/lib/gcc/arm-none-eabi/:/usr/lib/gcc/arm-none-eabi/10.3.1/:/usr/lib/gcc/arm-none-eabi/:/usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/bin/]
   ignore line: [LIBRARY_PATH=/usr/lib/gcc/arm-none-eabi/10.3.1/:/usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/]
-  ignore line: [COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles/cmTC_c759f.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-mlibarch=armv4t' '-march=armv4t']
-  ignore line: [Linking CXX static library libcmTC_c759f.a]
-  ignore line: [/home/felix/code/clion-2023.1.3/bin/cmake/linux/x64/bin/cmake -P CMakeFiles/cmTC_c759f.dir/cmake_clean_target.cmake]
-  ignore line: [/home/felix/code/clion-2023.1.3/bin/cmake/linux/x64/bin/cmake -E cmake_link_script CMakeFiles/cmTC_c759f.dir/link.txt --verbose=1]
-  ignore line: [arm-none-eabi-ar qc libcmTC_c759f.a CMakeFiles/cmTC_c759f.dir/CMakeCXXCompilerABI.cpp.obj]
-  ignore line: [/usr/bin/arm-none-eabi-ranlib libcmTC_c759f.a]
-  ignore line: [gmake[1]: Leaving directory '/home/felix/CLionProjects/FlowerLED/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-jFINmZ']
+  ignore line: [COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles/cmTC_a3bdb.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-mlibarch=armv4t' '-march=armv4t']
+  ignore line: [Linking CXX static library libcmTC_a3bdb.a]
+  ignore line: [/home/felix/code/clion-2023.1.3/bin/cmake/linux/x64/bin/cmake -P CMakeFiles/cmTC_a3bdb.dir/cmake_clean_target.cmake]
+  ignore line: [/home/felix/code/clion-2023.1.3/bin/cmake/linux/x64/bin/cmake -E cmake_link_script CMakeFiles/cmTC_a3bdb.dir/link.txt --verbose=1]
+  ignore line: [arm-none-eabi-ar qc libcmTC_a3bdb.a CMakeFiles/cmTC_a3bdb.dir/CMakeCXXCompilerABI.cpp.obj]
+  ignore line: [/usr/bin/arm-none-eabi-ranlib libcmTC_a3bdb.a]
+  ignore line: [gmake[1]: Leaving directory '/home/felix/CLionProjects/FlowerLED/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-QBoVR6']
   ignore line: []
   ignore line: []
   implicit libs: []
