@@ -188,7 +188,7 @@ void FSM_ChangeAllEventTo_InAct() {
         eventOfLED[i] = 0;
         Set_LEDPWMtimer(i, LED_OFF);                                        //Turn off all LEDs
         error("%d  %d  %d  %d  %d, contOfLEDlighting == %d, inActCont == %d", eventOfLED[0], eventOfLED[1],
-             eventOfLED[2], eventOfLED[3], eventOfLED[4], contOfLEDlighting, inActCont);
+              eventOfLED[2], eventOfLED[3], eventOfLED[4], contOfLEDlighting, inActCont);
     }
     increasement = 0;                                                                    //Turn off the breathing LEDs
     waitForAct_LEDnum = -1;                                                              //Delete the "waitForAct" LEDnum
@@ -328,8 +328,7 @@ void TIM3unit(GPIO_TypeDef *SW_GPIO_Port, uint16_t SW_Pin, int LEDnum) {
         if (eventOfLED[LEDnum] == 1)                                                             //LEDx is "waitToAct"
         {
             FSM_ChangeEventTo_Acted_AndChangeRandomLEDEventTo_WaitForAct(LEDnum);
-        }
-        else if (eventOfLED[LEDnum] == 4) {                                                      //LED is all acted
+        } else if (eventOfLED[LEDnum] == 4) {                                                      //LED is all acted
             return;
         } else {                                                                                   //Wrong SW is pressed
             FSM_ChangeAllEventTo_FailToAct();
@@ -360,12 +359,13 @@ void LEDlightingUnit(int LEDnum) {
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
     if (htim->Instance == htim4.Instance) {
         static int periodOfBreathingLED;
-        if (periodOfBreathingLED >= LED_MAX_PERIOD || periodOfBreathingLED <= 0) increasement *= -1;     //reverse the increasement's direction
+        if (periodOfBreathingLED >= LED_MAX_PERIOD || periodOfBreathingLED <= 0)
+            increasement *= -1;     //reverse the increasement's direction
         if (increasement != 0)                                              //if breathing LED should be on
             periodOfBreathingLED += increasement;                           //Refresh the breathing LED's period
-            for (int i = 0; i < 5; ++i) {
-                Set_LEDPWMtimer(i, periodOfBreathingLED);
-            }
+        for (int i = 0; i < 5; ++i) {
+            Set_LEDPWMtimer(i, periodOfBreathingLED);
+        }
     }
     if (htim->Instance == htim3.Instance) {                             //40ms timer to smooth the SW
         TIM3unit(SW0_GPIO_Port, SW0_Pin, 0);
