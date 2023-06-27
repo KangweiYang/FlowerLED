@@ -43,10 +43,11 @@ const uint32_t LEDchannel[5] = {TIM_CHANNEL_1, TIM_CHANNEL_2, TIM_CHANNEL_3, TIM
 
 #define SW_ON  SET
 #define SW_OFF RESET
-#define SW_EXTENDED_PRESSED_TIME 30
+#define SW_EXTENDED_PRESSED_TIME 10
 
 #define LED_ON 0
 #define LED_OFF htim1.Init.Period
+#define WAIT_TIME   6
 
 #define DEBUG
 #define TAG "main"
@@ -75,6 +76,8 @@ const uint32_t LEDchannel[5] = {TIM_CHANNEL_1, TIM_CHANNEL_2, TIM_CHANNEL_3, TIM
 int eventOfLED[5] = {0, 0, 0, 0, 0};      //0:inAct   1:waitForAct    2.acted 3.failToAct 4.allActed
 uint16_t pressedContOfSW[5] = {0};
 int waitForAct_LEDnum = -1;
+int contOfLEDlighting = 0;
+int inActCont = 0;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -106,19 +109,29 @@ void Renew_RandomNum() {
 }
 
 
-void FSMunit_ChangeEventTo_WaitForAct(int LED) {
+void FSMunit_ChangeRandomEventTo_WaitForAct(int LED) {
+    HAL_TIM_Base_Start_IT(&htim5);
     if (eventOfLED[LED] == 0) {               //select the inAct LED, change it to waitForAct
         eventOfLED[LED] = 1;
         info("eventOfLED[%d} is changed from 0 to 1!", LED);
         waitForAct_LEDnum = LED;                                //save the LEDnum whose event is "waitForAct"
     } else if (eventOfLED[LED] != 4) {
         info("the randomNum is not in [0, 4], let it ++ and retry!");
-        FSMunit_ChangeEventTo_WaitForAct((LED + 1) % 5);    //selected the acted LED, change the LED number
+        FSMunit_ChangeRandomEventTo_WaitForAct((LED + 1) % 5);    //selected the acted LED, change the LED number
     }
+    contOfLEDlighting = 0;
 }
 
-void FSM_ChangeEventTo_WaitForAct() {
-    FSMunit_ChangeEventTo_WaitForAct(HAL_GetTick() % 5);
+void FSM_ChangeRandomEventTo_WaitForAct() {
+    FSMunit_ChangeRandomEventTo_WaitForAct(HAL_GetTick() % 5);
+}
+
+void FSM_ChangeAllEventTo_FailToAct() {
+    for (int i = 0; i < 5; ++i) {
+        eventOfLED[i] = 3;                                             //Trun all LEDs into "failToAct"
+    }
+    waitForAct_LEDnum = -1;                                             //delete the saved LEDnum whose event is "waitForAct"
+    inActCont = 0;
 }
 
 void FSM_ChangeEventTo_Acted_AndChangeRandomLEDEventTo_WaitForAct(int actLEDnum) {
@@ -138,14 +151,20 @@ void FSM_ChangeEventTo_Acted_AndChangeRandomLEDEventTo_WaitForAct(int actLEDnum)
         }
         int randomNum = HAL_GetTick() % 5;
         info("Change random LED event to WaitForAct, random num is %d", randomNum);
-        FSM_ChangeEventTo_WaitForAct(randomNum);
+        FSM_ChangeRandomEventTo_WaitForAct(randomNum);
     } else if (eventOfLED[actLEDnum] != 1) {                           //Wrong SW is pressed,
         error("WRONG SW%d is pressed!", actLEDnum);                 //turn all event of LED into "failToAct"
-        for (int i = 0; i < 5; ++i) {
-            eventOfLED[i] = 3;
-        }
-        waitForAct_LEDnum = -1;                                     //delete the saved LEDnum whose event is "waitForAct"
+        FSM_ChangeAllEventTo_FailToAct();
     }
+}
+
+void FSM_ChangeAllEventTo_InAct() {
+    info("Change all event to \"inAct\"");
+    for (int i = 0; i < 5; ++i) {
+        eventOfLED[i] = 0;
+    }
+    waitForAct_LEDnum = -1;
+    HAL_TIM_Base_Start_IT(&htim5);                                                  //3s timer
 }
 /* USER CODE END 0 */
 
@@ -203,7 +222,7 @@ int main(void) {
     while (1) {
         /* USER CODE END WHILE */
         HAL_Delay(500);
-        info("%d  %d  %d  %d  %d", eventOfLED[0], eventOfLED[1], eventOfLED[2], eventOfLED[3], eventOfLED[4]);
+        info("%d  %d  %d  %d  %d, contOfLEDlighting == %d, inActCont == %d", eventOfLED[0], eventOfLED[1], eventOfLED[2], eventOfLED[3], eventOfLED[4], contOfLEDlighting, inActCont);
         for (int i = 0; i < 4; ++i) {
             switch (eventOfLED[i]) {
                 case 0:
@@ -268,20 +287,19 @@ void TIM3unit(GPIO_TypeDef *SW_GPIO_Port, uint16_t SW_Pin, int LEDnum) {
         pressedContOfSW[LEDnum]++;
         info("SW%d Pressed! pressedContOfSW[%d] == %d", LEDnum, LEDnum, pressedContOfSW[LEDnum]);
     } else if (HAL_GPIO_ReadPin(SW_GPIO_Port, SW_Pin) == SW_OFF && pressedContOfSW[LEDnum] != 0) {  //SWx is releasing
+        contOfLEDlighting = 0;
         if (eventOfLED[LEDnum] == 1)                                                             //LEDx is "waitToAct"
             FSM_ChangeEventTo_Acted_AndChangeRandomLEDEventTo_WaitForAct(LEDnum);
-        else{                                                                                   //Wrong SW is pressed
-            waitForAct_LEDnum = -1;                                     //delete the saved LEDnum whose event is "waitForAct"
-            for (int i = 0; i < 5; ++i){
-                eventOfLED[i] = 3;                                          //Change all events into "failToAct"
-            }
+        else if (eventOfLED[LEDnum] == 4){                                                      //LED is all acted
+            return;
+        }
+        else {                                                                                   //Wrong SW is pressed
+            FSM_ChangeAllEventTo_FailToAct();
+            info("0");
         }
         if (eventOfLED[LEDnum] == 3 && pressedContOfSW[LEDnum] > SW_EXTENDED_PRESSED_TIME) {      //LEDx is "failToAct"
             info("SW%d is pressed extendedly!");
-            for (int i = 0; i < 5; ++i) {
-                eventOfLED[i] = 0;
-            }
-            HAL_TIM_Base_Start_IT(&htim5);                                                  //3s timer
+            FSM_ChangeAllEventTo_InAct();
         }
         pressedContOfSW[LEDnum] = 0;
     }
@@ -289,15 +307,20 @@ void TIM3unit(GPIO_TypeDef *SW_GPIO_Port, uint16_t SW_Pin, int LEDnum) {
 }
 
 void LEDlightingUnit(int LEDnum) {
-    static int statusOfLED;
-    if (statusOfLED == LED_OFF) {
-        statusOfLED = LED_ON;
+    if (contOfLEDlighting >= WAIT_TIME) {                              //Time is out
+        HAL_TIM_Base_Stop(&htim5);
+        contOfLEDlighting = 0;
+        FSM_ChangeAllEventTo_FailToAct();
+        info("1");
+    }
+    if (contOfLEDlighting % 2 != LED_ON) {
+        contOfLEDlighting++;
         __HAL_TIM_SET_COMPARE(&htim1, LEDchannel[LEDnum], LED_ON);
-        info("LED%d turn ON!", LEDnum);
+        info("LED%d turn ON!, contOfLEDlighting == %d", LEDnum, contOfLEDlighting);
     } else {
-        statusOfLED = LED_OFF;
+        contOfLEDlighting++;
         __HAL_TIM_SET_COMPARE(&htim1, LEDchannel[LEDnum], LED_OFF);
-        info("LED%d turn OFF!", LEDnum);
+        info("LED%d turn OFF!, contOfLEDlighting == %d", LEDnum, contOfLEDlighting);
     }
 }
 
@@ -308,118 +331,36 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
         TIM3unit(SW2_GPIO_Port, SW2_Pin, 2);
         TIM3unit(SW3_GPIO_Port, SW3_Pin, 3);
         TIM3unit(SW4_GPIO_Port, SW4_Pin, 4);
+
     }
-//        if (HAL_GPIO_ReadPin(SW0_GPIO_Port, SW0_Pin) == SW_ON) {
-//            pressedContOfSW[0]++;
-//            info("SW0 Pressed! cont == %d", pressedContOfSW[0]);
-////            FSM_ChangeEventTo_Acted_AndChangeRandomLEDEventTo_WaitForAct(0);
-//        } else if (HAL_GPIO_ReadPin(SW0_GPIO_Port, SW0_Pin) == SW_OFF && pressedContOfSW[0] != 0) {
-//            if (eventOfLED[0] ==
-//                1) {                                                                 //LED0 is "waitToAct"
-//                FSM_ChangeEventTo_Acted_AndChangeRandomLEDEventTo_WaitForAct(0);
-//            }
-//            if (eventOfLED[0] == 3 &&
-//                pressedContOfSW[0] > SW_EXTENDED_PRESSED_TIME) {                           //LED0 is "failToAct"
-//                info("SW0 is pressed extendedly!");
-//                for (int i = 0; i < 5; ++i) {
-//                    eventOfLED[i] = 0;
-//                }
-//                HAL_TIM_Base_Start_IT(&htim5);
-//            }
-//        }
-//        if (HAL_GPIO_ReadPin(SW1_GPIO_Port, SW1_Pin) == SW_ON) {
-//            pressedContOfSW[1]++;
-//            info("SW1 Pressed! cont == %d", pressedContOfSW[1]);
-////            FSM_ChangeEventTo_Acted_AndChangeRandomLEDEventTo_WaitForAct(1);
-//        } else if (HAL_GPIO_ReadPin(SW1_GPIO_Port, SW1_Pin) == SW_OFF && pressedContOfSW[1] != 0) {
-//            if (eventOfLED[1] ==
-//                1) {                                                                 //LED1 is "waitToAct"
-//                FSM_ChangeEventTo_Acted_AndChangeRandomLEDEventTo_WaitForAct(1);
-//            }
-//            if (eventOfLED[1] == 3 &&
-//                pressedContOfSW[1] > SW_EXTENDED_PRESSED_TIME) {                           //LED1 is "failToAct"
-//                info("SW1 is pressed extendedly!");
-//                for (int i = 0; i < 5; ++i) {
-//                    eventOfLED[i] = 0;
-//                }
-//                HAL_TIM_Base_Start_IT(&htim5);
-//            }
-//        } if (HAL_GPIO_ReadPin(SW2_GPIO_Port, SW2_Pin) == SW_ON) {
-//            pressedContOfSW[2]++;
-//            info("SW2 Pressed! cont == %d", pressedContOfSW[2]);
-////            FSM_ChangeEventTo_Acted_AndChangeRandomLEDEventTo_WaitForAct(2);
-//        } else if (HAL_GPIO_ReadPin(SW2_GPIO_Port, SW2_Pin) == SW_OFF && pressedContOfSW[2] != 0) {
-//            if (eventOfLED[2] ==
-//                1) {                                                                 //LED2 is "waitToAct"
-//                FSM_ChangeEventTo_Acted_AndChangeRandomLEDEventTo_WaitForAct(2);
-//            }
-//            if (eventOfLED[2] == 3 &&
-//                pressedContOfSW[2] > SW_EXTENDED_PRESSED_TIME) {                           //LED2 is "failToAct"
-//                info("SW2 is pressed extendedly!");
-//                for (int i = 0; i < 5; ++i) {
-//                    eventOfLED[i] = 0;
-//                }
-//                HAL_TIM_Base_Start_IT(&htim5);
-//            }
-//        } if (HAL_GPIO_ReadPin(SW3_GPIO_Port, SW3_Pin) == SW_ON) {
-//            pressedContOfSW[3]++;
-//            info("SW3 Pressed! cont == %d", pressedContOfSW[3]);
-////            FSM_ChangeEventTo_Acted_AndChangeRandomLEDEventTo_WaitForAct(3);
-//        } else if (HAL_GPIO_ReadPin(SW3_GPIO_Port, SW3_Pin) == SW_OFF && pressedContOfSW[3] != 0) {
-//            if (eventOfLED[3] == 1) {                                             //LED3 is "waitToAct"
-//                FSM_ChangeEventTo_Acted_AndChangeRandomLEDEventTo_WaitForAct(3);
-//            }
-//            if (eventOfLED[3] == 3 &&
-//                pressedContOfSW[3] > SW_EXTENDED_PRESSED_TIME) {                           //LED3 is "failToAct"
-//                info("SW3 is pressed extendedly!");
-//                for (int i = 0; i < 5; ++i) {
-//                    eventOfLED[i] = 0;
-//                }
-//                HAL_TIM_Base_Start_IT(&htim5);
-//            }
-//        } if (HAL_GPIO_ReadPin(SW4_GPIO_Port, SW4_Pin) == SW_ON) {
-//            pressedContOfSW[4]++;
-//            info("SW4 Pressed! cont == %d", pressedContOfSW[4]);
-////            FSM_ChangeEventTo_Acted_AndChangeRandomLEDEventTo_WaitForAct(4);
-//        } else if (HAL_GPIO_ReadPin(SW4_GPIO_Port, SW4_Pin) == SW_OFF && pressedContOfSW[4] != 0) {
-//            if (eventOfLED[4] == 1) {                                                      //LED4 is "waitToAct"
-//                FSM_ChangeEventTo_Acted_AndChangeRandomLEDEventTo_WaitForAct(4);
-//            }
-//            if (eventOfLED[4] == 3 &&
-//                pressedContOfSW[4] > SW_EXTENDED_PRESSED_TIME) {                           //LED4 is "failToAct"
-//                info("SW4 is pressed extendedly!");
-//                for (int i = 0; i < 5; ++i) {
-//                    eventOfLED[i] = 0;
-//                }
-//                HAL_TIM_Base_Start_IT(&htim5);
-//            }
-//            Renew_RandomNum();
-//        }
 
     if (htim->Instance == htim5.Instance) {                             //0.5s timer
         if (eventOfLED[0] == 0 && eventOfLED[1] == 0 && eventOfLED[2] == 0 && eventOfLED[3] == 0 &&
             eventOfLED[4] == 0) {                                         //all LEDs are inactivated
-            static int inActCont;
             inActCont++;
             if (inActCont == 7) {                                       //3s
-                info("random number is %lX", Get_RandomNum());
-                FSM_ChangeEventTo_WaitForAct();
+                FSM_ChangeRandomEventTo_WaitForAct();
                 inActCont = 0;
                 HAL_TIM_Base_Stop(&htim5);
             }
         }
-        if (waitForAct_LEDnum != -1 && waitForAct_LEDnum != 4) {          //TIM1 PWM LEDs
+        if (waitForAct_LEDnum != -1 && waitForAct_LEDnum != 4) {                //TIM1 PWM LEDs
             LEDlightingUnit(waitForAct_LEDnum);
         } else if (waitForAct_LEDnum == 4) {
-            static int statusOfLED;
-            if (statusOfLED == LED_OFF) {
-                statusOfLED = LED_ON;
+            if (contOfLEDlighting >= WAIT_TIME) {                               //Time is out
+                HAL_TIM_Base_Stop(&htim5);
+                contOfLEDlighting = 0;
+                FSM_ChangeAllEventTo_FailToAct();
+                info("3");
+            }
+            if (contOfLEDlighting % 2 != LED_ON) {
+                contOfLEDlighting++;
                 __HAL_TIM_SET_COMPARE(&htim1, LEDchannel[4], LED_ON);
-                info("LED4 turn ON!");
+                info("LED4 turn ON!, contOfLEDlighting == %d", contOfLEDlighting);
             } else {
-                statusOfLED = LED_OFF;
+                contOfLEDlighting++;
                 __HAL_TIM_SET_COMPARE(&htim1, LEDchannel[4], LED_OFF);
-                info("LED4 turn OFF!");
+                info("LED4 turn OFF!, contOfLEDlighting == %d", contOfLEDlighting);
             }
         }
     }
