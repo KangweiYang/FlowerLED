@@ -75,12 +75,20 @@ const uint32_t LEDchannel[5] = {TIM_CHANNEL_1, TIM_CHANNEL_2, TIM_CHANNEL_3, TIM
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-int eventOfLED[5] = {0, 0, 0, 0, 0};      //0:inAct   1:waitForAct    2.acted 3.failToAct 4.allActed
-uint16_t pressedContOfSW[5] = {0};
-int waitForAct_LEDnum = -1;
-int contOfLEDlighting = 0;
-int inActCont = 0;
-int increasement = 0;
+int eventOfLED[5] = {0, 0, 0, 0, 0};      //event num of LEDs.  0:inAct   1:waitForAct    2.acted 3.failToAct 4.allActed
+
+uint16_t pressedContOfSW[5] = {0};                              //count the time of pressed SW.
+
+int waitForAct_LEDnum = -1;                                     //the LED num whose event is "waitForAct" right now.
+                                                                //If no LED's event is "waitForAct", the value will be -1.
+                                                                
+int contOfLEDlighting = 0;                                      //the value ++ when the "waitForAct" LED lightning each time.
+
+int inActCont = 0;                                              //Count the time after the LEDs are "inAct".
+
+int breathingIncreasement = 0;                                  //The value of increasement while renew breathing LEDs' PWM.
+                                                                //It will be positive if breathing LEDs' PWM period is increasing,
+                                                                // will be negative if breathing LEDs' PWM period is decreasing.
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -91,6 +99,13 @@ void SystemClock_Config(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+/**
+    * @breif    Get a random number, I try to use FLASH to save System clock, but failed    :(
+    *           So I just use HAL_GetTick() to get a random num.
+    * @note     None
+    * @param    None
+    * @retval   uint32_t    random number
+    */
 uint32_t Get_RandomNum() {
 //    HAL_FLASH_Unlock();
 //    uint32_t randomData = *(__IO uint32_t*)0x08030000;
@@ -100,6 +115,12 @@ uint32_t Get_RandomNum() {
     return HAL_GetTick();
 }
 
+/**
+    * @breif    Renew FLASH but cannot run  :(
+    * @note     None
+    * @param    None
+    * @retval   None
+    */
 void Renew_RandomNum() {
 //    HAL_FLASH_Unlock();
 //    uint32_t randomData = *(__IO uint32_t*)0x08030000;
@@ -111,11 +132,24 @@ void Renew_RandomNum() {
 //    HAL_FLASH_Lock();
 }
 
+/**
+    * @breif    Start breathing LEDs, let all LEDs to breathe.
+    * @note     None
+    * @param    None
+    * @retval   None
+    */
 void Set_AllLEDBreathing() {
     HAL_TIM_Base_Start_IT(&htim4);
-    increasement = -20;
+    breathingIncreasement = -20;
 }
 
+/**
+    * @breif    Set the duty ratio, to renew the PWM of LEDs.
+    * @note     None
+    * @param    LEDnum: the serial number of LED
+    *           pwm: the duty ratio of LED's PWM
+    * @retval   None
+    */
 void Set_LEDPWMtimer(int LEDnum, int pwm) {
     if (LEDnum >= 0 && LEDnum <= 3)                                            //TIM1 PWM
         __HAL_TIM_SET_COMPARE(&htim1, LEDchannel[LEDnum], pwm);
@@ -125,7 +159,14 @@ void Set_LEDPWMtimer(int LEDnum, int pwm) {
         error("LEDnum is out range!");
 }
 
-void FSMunit_ChangeRandomEventTo_WaitForAct(int LED) {
+/**
+    * @breif    Finite State Machine function: change a RANDOM LED's event to "waitForAct"
+    * @note     None
+    * @param    None
+    * @retval   None
+    */
+void FSM_ChangeRandomEventTo_WaitForAct() {
+    int LED = HAL_GetTick() % 5;                                        //Get a random number.
     HAL_TIM_Base_Start_IT(&htim5);
     if (eventOfLED[LED] == 0) {                                         //select the inAct LED, change it to waitForAct
         eventOfLED[LED] = 1;
@@ -134,15 +175,17 @@ void FSMunit_ChangeRandomEventTo_WaitForAct(int LED) {
         HAL_TIM_Base_Start_IT(&htim5);                              //Start lightning!
     } else if (eventOfLED[LED] != 4) {
         info("the randomNum is not in [0, 4], let it ++ and retry!");
-        FSMunit_ChangeRandomEventTo_WaitForAct((LED + 1) % 5);      //selected the acted LED, change the LED number
+        FSM_ChangeRandomEventTo_WaitForAct((LED + 1) % 5);      //selected the acted LED, change the LED number
     }
     contOfLEDlighting = 0;
 }
 
-void FSM_ChangeRandomEventTo_WaitForAct() {
-    FSMunit_ChangeRandomEventTo_WaitForAct(HAL_GetTick() % 5);
-}
-
+/**
+    * @breif    Finite State Machine function: change ALL LED's event to "failToAct"
+    * @note     None
+    * @param    None
+    * @retval   None
+    */
 void FSM_ChangeAllEventTo_FailToAct() {
     for (int i = 0; i < 5; ++i) {
         eventOfLED[i] = 3;                                              //Turn all LEDs into "failToAct"
@@ -152,10 +195,16 @@ void FSM_ChangeAllEventTo_FailToAct() {
     }
     waitForAct_LEDnum = -1;                                             //delete the saved LEDnum whose event is "waitForAct"
     inActCont = 0;                                                      //count time(3s)
-    increasement = 0;                                                   //Turn off the breathing LEDs
+    breathingIncreasement = 0;                                                   //Turn off the breathing LEDs
     contOfLEDlighting = 0;
 }
 
+/**
+    * @breif    Finite State Machine function: change the LED's event to "acted" and change a RANDOM LED's event to "waitForAct"
+    * @note     None
+    * @param    actLEDnum: the serial number of LED when SWx is pressed.
+    * @retval   None
+    */
 void FSM_ChangeEventTo_Acted_AndChangeRandomLEDEventTo_WaitForAct(int actLEDnum) {
     if (eventOfLED[actLEDnum] == 1) {                                   //pressed the switch SWx correctly
         info("You pressed the switch SW%d correctly!", actLEDnum);
@@ -182,6 +231,12 @@ void FSM_ChangeEventTo_Acted_AndChangeRandomLEDEventTo_WaitForAct(int actLEDnum)
     }
 }
 
+/**
+    * @breif    Finite State Machine function: change ALL LED's event to "inAct"
+    * @note     None
+    * @param    None
+    * @retval   None
+    */
 void FSM_ChangeAllEventTo_InAct() {
     info("Change all event to \"inAct\"");
     for (int i = 0; i < 5; ++i) {
@@ -190,7 +245,7 @@ void FSM_ChangeAllEventTo_InAct() {
         error("%d  %d  %d  %d  %d, contOfLEDlighting == %d, inActCont == %d", eventOfLED[0], eventOfLED[1],
               eventOfLED[2], eventOfLED[3], eventOfLED[4], contOfLEDlighting, inActCont);
     }
-    increasement = 0;                                                                    //Turn off the breathing LEDs
+    breathingIncreasement = 0;                                                                    //Turn off the breathing LEDs
     waitForAct_LEDnum = -1;                                                              //Delete the "waitForAct" LEDnum
     HAL_TIM_Base_Start_IT(&htim5);                                                  //3s timer
 }
@@ -252,16 +307,6 @@ int main(void) {
         HAL_Delay(500);
         info("%d  %d  %d  %d  %d, contOfLEDlighting == %d, inActCont == %d", eventOfLED[0], eventOfLED[1],
              eventOfLED[2], eventOfLED[3], eventOfLED[4], contOfLEDlighting, inActCont);
-        for (int i = 0; i < 4; ++i) {
-            switch (eventOfLED[i]) {
-                case 0:
-                    __HAL_TIM_SET_COMPARE(&htim1, LEDchannel[i], 1000);
-                    break;
-                case 1:
-                    HAL_TIM_Base_Start_IT(&htim5);
-                    break;
-            }
-        }
         /* USER CODE BEGIN 3 */
     }
     /* USER CODE END 3 */
@@ -360,14 +405,14 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
     if (htim->Instance == htim4.Instance) {
         static int periodOfBreathingLED;
         if (periodOfBreathingLED >= LED_MAX_PERIOD || periodOfBreathingLED <= 0)
-            increasement *= -1;     //reverse the increasement's direction
-        if (increasement != 0)                                              //if breathing LED should be on
-            periodOfBreathingLED += increasement;                           //Refresh the breathing LED's period
+            breathingIncreasement *= -1;                                //reverse the breathingIncreasement's direction
+        if (breathingIncreasement != 0)                                              //if breathing LED should be on
+            periodOfBreathingLED += breathingIncreasement;                           //Refresh the breathing LED's period
         for (int i = 0; i < 5; ++i) {
             Set_LEDPWMtimer(i, periodOfBreathingLED);
         }
     }
-    if (htim->Instance == htim3.Instance) {                             //40ms timer to smooth the SW
+    if (htim->Instance == htim3.Instance) {                                             //40ms timer to smooth the SW
         TIM3unit(SW0_GPIO_Port, SW0_Pin, 0);
         TIM3unit(SW1_GPIO_Port, SW1_Pin, 1);
         TIM3unit(SW2_GPIO_Port, SW2_Pin, 2);
@@ -376,38 +421,36 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
 
     }
 
-    if (htim->Instance == htim5.Instance) {                             //0.5s timer
+    if (htim->Instance == htim5.Instance) {                                                 //0.5s timer
         if (eventOfLED[0] == 0 && eventOfLED[1] == 0 && eventOfLED[2] == 0 && eventOfLED[3] == 0 &&
-            eventOfLED[4] == 0) {                                         //all LEDs are inactivated
+            eventOfLED[4] == 0) {                                                           //all LEDs are inactivated
             inActCont++;
-            if (inActCont == 7) {                                       //3s
+            if (inActCont == 7) {                                                           //3s
                 FSM_ChangeRandomEventTo_WaitForAct();
                 inActCont = 0;
                 HAL_TIM_Base_Stop(&htim5);
             }
         }
-        if (waitForAct_LEDnum != -1) {                //TIM1 PWM LEDs
+        if (waitForAct_LEDnum != -1) {                                                      //TIM1 PWM LEDs
             LEDlightingUnit(waitForAct_LEDnum);
         }
     }
 }
 
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
-    if (GPIO_Pin == SW0_Pin) {                   //SW0
-        HAL_TIM_Base_Start_IT(&htim3);
-        info("SW0");
-        __HAL_GPIO_EXTI_CLEAR_FLAG(GPIO_PIN_0);
-    }
-    if (GPIO_Pin == SW1_Pin) {                   //SW1
+    if (GPIO_Pin == SW0_Pin) {                                                              //SW0
         HAL_TIM_Base_Start_IT(&htim3);
     }
-    if (GPIO_Pin == SW2_Pin) {                   //SW2
+    if (GPIO_Pin == SW1_Pin) {                                                              //SW1
         HAL_TIM_Base_Start_IT(&htim3);
     }
-    if (GPIO_Pin == SW3_Pin) {                   //SW3
+    if (GPIO_Pin == SW2_Pin) {                                                              //SW2
         HAL_TIM_Base_Start_IT(&htim3);
     }
-    if (GPIO_Pin == SW4_Pin) {                   //SW4
+    if (GPIO_Pin == SW3_Pin) {                                                              //SW3
+        HAL_TIM_Base_Start_IT(&htim3);
+    }
+    if (GPIO_Pin == SW4_Pin) {                                                              //SW4
         HAL_TIM_Base_Start_IT(&htim3);
     }
 }
